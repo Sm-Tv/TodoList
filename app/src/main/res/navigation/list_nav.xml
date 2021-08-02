@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_nav"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.list.note.ListFragment"
+        android:label="@string/note_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_updateFeagment"
+            app:destination="@id/updateFeagment" />
+        <action
+            android:id="@+id/action_listFragment_to_shopingListFragment2"
+            app:destination="@id/shopingListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.add.note.AddFragment"
+        android:label="@string/add_note_list"
+        tools:layout="@layout/fragment_add" >
+
+        <action
+            android:id="@+id/action_addFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFeagment"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.update.note.UpdateFeagment"
+        android:label="@string/update_note_list"
+        tools:layout="@layout/fragment_update_feagment" >
+        <action
+            android:id="@+id/action_updateFeagment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <argument
+            android:name="currentNote"
+            app:argType="sm_tv_prodactions.com.newtodolist.models.Note" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopingListFragment"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.list.shopping.ShopingListFragment"
+        android:label="@string/shoping_list"
+        tools:layout="@layout/fragment_shoping_list" >
+        <action
+            android:id="@+id/action_shopingListFragment_to_updateShopingItem"
+            app:destination="@id/updateShopingItem" />
+        <action
+            android:id="@+id/action_shopingListFragment_to_addShopingListFragment"
+            app:destination="@id/addShopingListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateShopingItem"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.update.shopping.UpdateShopingItem"
+        android:label="@string/update_shoping_list"
+        tools:layout="@layout/fragment_update_shoping_item" >
+        <action
+            android:id="@+id/action_updateShopingItem_to_shopingListFragment"
+            app:destination="@id/shopingListFragment" />
+        <argument
+            android:name="currentItem"
+            app:argType="sm_tv_prodactions.com.newtodolist.models.ShoppingList" />
+    </fragment>
+    <fragment
+        android:id="@+id/addShopingListFragment"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.add.shopping.AddShopingListFragment"
+        android:label="@string/add_shoping_list"
+        tools:layout="@layout/fragment_add_shoping_list" >
+        <action
+            android:id="@+id/action_addShopingListFragment_to_shopingListFragment"
+            app:destination="@id/shopingListFragment" />
+    </fragment>
+</navigation>

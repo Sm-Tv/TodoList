@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Список дел</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="done">Готово</string>
+    <string name="not_done">Выполняется</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="Title_dialog_note">Удалить все заметки?</string>
+    <string name="massage_dialog_note">Будут удалены все ваши заметки.</string>
+    <string name="Title_dialog_shop">Удалить все покупки?</string>
+    <string name="massage_dialog_shop">Будут удалены все ваши покупки.</string>
+
+
+    <string name="note_list">Заметки</string>
+    <string name="add_note_list">Добавить заметку</string>
+    <string name="update_note_list">Обновить заметку</string>
+
+    <string name="shoping_list">Список покупок</string>
+    <string name="add_shoping_list">Добавить покупку</string>
+    <string name="update_shoping_list">Обновить покупку</string>
+
+    <string name="warning_message">Введите данные в поле заметки</string>
+    <string name="warning_message_shop">Введите данные в поле покупки</string>
+
+    <string name="tint_note">Введите текст заметки</string>
+    <string name="tint_shop">Введите текст покупки</string>
+
+    <string name="add">Добавить</string>
+    <string name="update">Обновить</string>
+
+
+</resources>
