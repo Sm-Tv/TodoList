@@ -8,15 +8,17 @@
     tools:context=".fragments.add.note.AddFragment">
 
     <EditText
+        style="mu"
         android:id="@+id/edTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="top"
         android:hint="@string/tint_note"
-        android:inputType="textPersonName"
+        android:inputType="textLongMessage|textPersonName|textMultiLine"
         android:minHeight="200dp"
         android:padding="16dp"
+        android:lines="8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
