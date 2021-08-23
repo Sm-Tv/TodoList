@@ -20,6 +20,7 @@
     <string name="shoping_list">Список покупок</string>
     <string name="add_shoping_list">Добавить покупку</string>
     <string name="update_shoping_list">Обновить покупку</string>
+    <string name="first_main_lists">Списки дел</string>
 
     <string name="warning_message">Введите данные в поле заметки</string>
     <string name="warning_message_shop">Введите данные в поле покупки</string>

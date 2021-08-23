@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_nav"
-    app:startDestination="@id/listFragment">
+    app:startDestination="@id/firstMainFragment">
 
     <fragment
         android:id="@+id/listFragment"
@@ -75,5 +75,32 @@
         <action
             android:id="@+id/action_addShopingListFragment_to_shopingListFragment"
             app:destination="@id/shopingListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstMainFragment"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.list.mainList.FirstMainFragment"
+        android:label="@string/first_main_lists"
+        tools:layout="@layout/fragment_first_main" >
+        <action
+            android:id="@+id/action_firstMainFragment_to_mainListFragment"
+            app:destination="@id/mainListFragment" />
+        <action
+            android:id="@+id/action_firstMainFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainListFragment"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.list.mainList.MainListFragment"
+        android:label="fragment_main_list"
+        tools:layout="@layout/fragment_main_list" >
+        <action
+            android:id="@+id/action_mainListFragment_to_firstMainFragment"
+            app:destination="@id/firstMainFragment" />
+        <action
+            android:id="@+id/action_mainListFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_mainListFragment_to_updateFeagment"
+            app:destination="@id/updateFeagment" />
     </fragment>
 </navigation>

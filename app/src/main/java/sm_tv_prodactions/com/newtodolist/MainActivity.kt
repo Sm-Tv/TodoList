@@ -30,9 +30,12 @@ class MainActivity : AppCompatActivity() {
 
         botoomNavView.setOnItemSelectedListener {
             when(it.itemId){
+                R.id.main_note_list->{
+                    findNavController(R.id.fragment).navigate(R.id.firstMainFragment)
+                }
                 R.id.shopping_list -> {
                     findNavController(R.id.fragment).navigate(R.id.shopingListFragment)
-                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                    //supportActionBar?.setDisplayHomeAsUpEnabled(false)
                     //botoomNavView.selectedItemId = R.id.todo_list
                     //finish()
                 }
@@ -51,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-        botoomNavView.selectedItemId = R.id.todo_list
+        botoomNavView.selectedItemId = R.id.main_note_list
         super.onStart()
     }
 
