@@ -83,7 +83,9 @@ class AddFragment : Fragment() {
     }
 
     fun View.showKeyboard() {
+        //поставит фокус на поле где вводить текст
         this.requestFocus()
+        // эти две строчки вызывают клавиатуру
         val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
     }

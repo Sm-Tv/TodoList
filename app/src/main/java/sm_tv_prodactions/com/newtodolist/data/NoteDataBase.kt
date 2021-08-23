@@ -6,11 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import sm_tv_prodactions.com.newtodolist.models.MainNote
 import sm_tv_prodactions.com.newtodolist.models.Note
+import sm_tv_prodactions.com.newtodolist.models.NotePlus
 import sm_tv_prodactions.com.newtodolist.models.ShoppingList
 
 
-@Database(entities = [Note::class, ShoppingList::class], version = 2)
+@Database(entities = [Note::class, ShoppingList::class, MainNote::class, NotePlus::class], version = 4)
 abstract class NoteDataBase: RoomDatabase() {
 
     abstract fun noteDao(): NoteDao

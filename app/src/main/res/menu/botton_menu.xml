@@ -2,15 +2,21 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/main_note_list"
+        android:icon="@drawable/ic_main_list"
+        android:title="Все списки"
+        android:orderInCategory="1"/>
+    <item
         android:id="@+id/todo_list"
         android:icon="@drawable/ic_baseline_playlist_add_check_24"
         android:title="Заметки"
-        android:orderInCategory="1"/>
+        android:orderInCategory="2"/>
     <item
         android:id="@+id/shopping_list"
         android:icon="@drawable/ic_shopping"
         android:title="Список покупок"
-        android:orderInCategory="2"/>
+        android:orderInCategory="3"/>
+
     <!--item
         android:id="@+id/diary"
         android:icon="@drawable/ic_baseline"

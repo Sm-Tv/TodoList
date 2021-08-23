@@ -36,7 +36,7 @@ class ListFragment : Fragment() {
         myRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         myRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
-        //NoteNiewModel
+        //NoteViewModel
         mViewModel = ViewModelProvider(this).get(NoteViewModels::class.java)
         mViewModel.readAllData.observe(viewLifecycleOwner, Observer { note->
             adapter.setItems(note,mViewModel)
