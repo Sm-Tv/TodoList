@@ -9,48 +9,22 @@ import kotlinx.coroutines.launch
 import sm_tv_prodactions.com.newtodolist.data.NoteDataBase
 import sm_tv_prodactions.com.newtodolist.models.MainNote
 import sm_tv_prodactions.com.newtodolist.repositories.NoteRepository
-import sm_tv_prodactions.com.newtodolist.models.Note
 
-class NoteViewModels(application: Application): AndroidViewModel(application) {
+class MainNoteViewModel(application: Application): AndroidViewModel(application) {
 
-    val readAllData: LiveData<List<Note>>
     val readAllMainNoteData: LiveData<List<MainNote>>
-
-    //val readAllDataCompletedNote: LiveData<List<Note>>
     private val repository: NoteRepository
 
     init {
         val noteDao = NoteDataBase.getDatabase(application).noteDao()
         repository = NoteRepository(noteDao)
-        readAllData = repository.readAllData
         readAllMainNoteData = repository.readAllMainNoteData
-        //readAllDataCompletedNote = repository.readAllData
     }
 
-    fun addNote(note: Note){
+    fun addMainNote(mainNote: MainNote){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addNote(note)
+            repository.addMainNote(mainNote)
         }
     }
-
-    fun updateNote(note: Note){
-        viewModelScope.launch(Dispatchers.IO){
-            repository.updateNote(note)
-        }
-    }
-
-    fun deleteNote(note:Note){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteNote(note)
-        }
-    }
-
-    fun deleteAllNotes(){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllNotes()
-        }
-    }
-
-
 
 }

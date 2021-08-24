@@ -20,7 +20,7 @@
     <string name="shoping_list">Список покупок</string>
     <string name="add_shoping_list">Добавить покупку</string>
     <string name="update_shoping_list">Обновить покупку</string>
-    <string name="first_main_lists">Списки дел</string>
+    <string name="first_main_lists">Мои списки</string>
 
     <string name="warning_message">Введите данные в поле заметки</string>
     <string name="warning_message_shop">Введите данные в поле покупки</string>
@@ -30,6 +30,14 @@
 
     <string name="add">Добавить</string>
     <string name="update">Обновить</string>
+
+
+    <string name="title_dialog">Название списка</string>
+    <string name="massage_dialog">Для создание списка дел введите его название</string>
+    <string name="hint_dialog">Название списка</string>
+    <string name="positive_dialog">Добавить</string>
+    <string name="negative_dialog">Отмена</string>
+    <string name="warning_dialog">Введите текст в поле для ввода текста</string>
 
 
 </resources>

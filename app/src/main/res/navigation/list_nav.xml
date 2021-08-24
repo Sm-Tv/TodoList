@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/firstMainFragment"
-        android:name="sm_tv_prodactions.com.newtodolist.fragments.list.mainList.FirstMainFragment"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.FirstMainFragment"
         android:label="@string/first_main_lists"
         tools:layout="@layout/fragment_first_main" >
         <action
@@ -90,7 +90,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainListFragment"
-        android:name="sm_tv_prodactions.com.newtodolist.fragments.list.mainList.MainListFragment"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.MainListFragment"
         android:label="fragment_main_list"
         tools:layout="@layout/fragment_main_list" >
         <action
@@ -102,5 +102,9 @@
         <action
             android:id="@+id/action_mainListFragment_to_updateFeagment"
             app:destination="@id/updateFeagment" />
+        <argument
+            android:name="mainNoteName"
+            app:argType="string"
+            android:defaultValue="not Name " />
     </fragment>
 </navigation>

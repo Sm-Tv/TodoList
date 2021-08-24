@@ -10,17 +10,17 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "ShoppingList_table")
 
 data class ShoppingList (
-@PrimaryKey(autoGenerate = true)
-val uid: Int,
+    @PrimaryKey(autoGenerate = true)
+    val uid: Int,
 
-@ColumnInfo(name = "title")
-var title:String,
+    @ColumnInfo(name = "title")
+    var title:String,
 
-@ColumnInfo(name = "timestamp")
-var timestamp: Long,
+    @ColumnInfo(name = "timestamp")
+    var timestamp: Long,
 
-@ColumnInfo(name = "done")
-var done: Boolean
+    @ColumnInfo(name = "done")
+    var done: Boolean
 
 ): Parcelable
 
