@@ -88,7 +88,7 @@ class MyMainFirstAdapter: RecyclerView.Adapter<MyMainFirstAdapter.MainViewHolder
 
 private fun String.asTime(): String {
     val time = Date(this.toLong())
-    var str = "HH:mm"
+    var str = "yyyy-MM-dd HH:mm"
     val timeFormst = SimpleDateFormat(str, Locale.getDefault())
     return timeFormst.format(time)
 }

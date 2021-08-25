@@ -8,6 +8,6 @@ data class StickyNotes(
     @Embedded
     val main_note: MainNote,
 
-    @Relation(parentColumn = "main_uid", entityColumn = "note_id")
+    @Relation(parentColumn = "main_timestamp", entityColumn = "timestamp")
     val notes: List<NotePlus>
 )

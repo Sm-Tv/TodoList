@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textSize="10dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/TvMainTitle"
         app:layout_constraintStart_toStartOf="@+id/TvMainTitle"

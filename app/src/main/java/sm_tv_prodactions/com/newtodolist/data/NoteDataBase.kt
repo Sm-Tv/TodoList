@@ -12,7 +12,7 @@ import sm_tv_prodactions.com.newtodolist.models.NotePlus
 import sm_tv_prodactions.com.newtodolist.models.ShoppingList
 
 
-@Database(entities = [Note::class, ShoppingList::class, MainNote::class, NotePlus::class], version = 4)
+@Database(entities = [Note::class, ShoppingList::class, MainNote::class, NotePlus::class], version = 6)
 abstract class NoteDataBase: RoomDatabase() {
 
     abstract fun noteDao(): NoteDao

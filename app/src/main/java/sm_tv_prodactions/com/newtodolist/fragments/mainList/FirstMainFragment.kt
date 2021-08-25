@@ -82,7 +82,7 @@ class FirstMainFragment : Fragment() {
                 //добавление в бд
                 mViewModel.addMainNote(mainNote)
                 dialog.dismiss()//закрываем диалоговое окно
-                bundelMainNote(title)
+                bundelMainNote(title,timestamp)
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -104,9 +104,10 @@ class FirstMainFragment : Fragment() {
         return !(TextUtils.isEmpty(title))
     }
 
-    private fun bundelMainNote(title: String){
+    private fun bundelMainNote(title: String, time: Long){
         val bundle = Bundle()
         bundle.putString("mainNoteName", title)
+        bundle.putLong("idMainList", time)
         findNavController().navigate(R.id.action_firstMainFragment_to_mainListFragment,bundle)
     }
 
