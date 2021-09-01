@@ -6,21 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import androidx.fragment.app.ListFragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SortedList
 import kotlinx.android.synthetic.main.item_new.view.*
 import sm_tv_prodactions.com.newtodolist.R
-import sm_tv_prodactions.com.newtodolist.fragments.list.note.ListFragmentDirections
 import sm_tv_prodactions.com.newtodolist.fragments.mainList.viewmodel.MainNoteViewModel
 import sm_tv_prodactions.com.newtodolist.models.foreignkey.ChildModel
 
+class AdapterTest: RecyclerView.Adapter<AdapterTest.NoteViewHolder>() {
 
-class AdapterPersonalNote: RecyclerView.Adapter<AdapterPersonalNote.NoteViewHolder>() {
-
-    private lateinit var vModel: MainNoteViewModel
-    private lateinit var parentTitle: String
+    //private lateinit var vModel: MainNoteViewModel
+    //private lateinit var parentTitle: String
 
     private var sortedList = SortedList(ChildModel::class.java, object : SortedList.Callback<ChildModel>() {
         override fun compare(o1: ChildModel, o2: ChildModel): Int {
@@ -67,7 +64,7 @@ class AdapterPersonalNote: RecyclerView.Adapter<AdapterPersonalNote.NoteViewHold
 
 
 
-        fun bind(noteer: ChildModel, mViewModel: MainNoteViewModel, parentTitle: String){
+        fun bind(noteer: ChildModel ){
             note = noteer
 
             completeChecked()
@@ -77,7 +74,7 @@ class AdapterPersonalNote: RecyclerView.Adapter<AdapterPersonalNote.NoteViewHold
 
             itemView.title_note.setOnClickListener {
                 val bundle = Bundle()
-                bundle.putString("parent_title", parentTitle)
+                //bundle.putString("parent_title", parentTitle)
                 bundle.putString("child_title", note.child_title)
                 bundle.putBoolean("child_done", note.child_done)
                 bundle.putInt("child_uid", note.child_uid)
@@ -86,13 +83,13 @@ class AdapterPersonalNote: RecyclerView.Adapter<AdapterPersonalNote.NoteViewHold
             }
 
             itemView.delete_note.setOnClickListener {
-                mViewModel.deleteChildModel(note)
+               // mViewModel.deleteChildModel(note)
             }
 
             itemView.completed_note.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { compoundButton, checked ->
 
                 note.child_done = checked
-                mViewModel.updateChildModel(note)
+               // mViewModel.updateChildModel(note)
                 completeChecked()
 
             })
@@ -111,24 +108,22 @@ class AdapterPersonalNote: RecyclerView.Adapter<AdapterPersonalNote.NoteViewHold
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-        return AdapterPersonalNote.NoteViewHolder(
+        return AdapterTest.NoteViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_new, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        sortedList.let { holder.bind(it.get(position), vModel, parentTitle) }
+        sortedList.let { holder.bind(it.get(position)) }
     }
 
     override fun getItemCount(): Int {
         return sortedList.size()
     }
 
-    fun setItems(notes: List<ChildModel>, viewModels: MainNoteViewModel, title: String) {
-        parentTitle = title
-        vModel = viewModels
+    fun setItems(notes: List<ChildModel>) {
+
         sortedList.replaceAll(notes)
 
     }
-
 }

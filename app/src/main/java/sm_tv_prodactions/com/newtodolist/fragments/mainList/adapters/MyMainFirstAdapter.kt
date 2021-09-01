@@ -1,14 +1,17 @@
 package sm_tv_prodactions.com.newtodolist.fragments.mainList.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SortedList
 import kotlinx.android.synthetic.main.item_first_main.view.*
 import sm_tv_prodactions.com.newtodolist.R
-import sm_tv_prodactions.com.newtodolist.models.MainNote
-import sm_tv_prodactions.com.newtodolist.models.Note
+import sm_tv_prodactions.com.newtodolist.fragments.mainList.viewmodel.FirstMainViewModel
+import sm_tv_prodactions.com.newtodolist.fragments.mainList.viewmodel.MainNoteViewModel
+import sm_tv_prodactions.com.newtodolist.models.foreignkey.ParentModel
 import sm_tv_prodactions.com.newtodolist.viewmodels.NoteViewModels
 import java.text.SimpleDateFormat
 import java.util.*
@@ -16,11 +19,11 @@ import java.util.*
 
 class MyMainFirstAdapter: RecyclerView.Adapter<MyMainFirstAdapter.MainViewHolder>() {
 
+    private lateinit var vModel: FirstMainViewModel
 
-
-    private var sortedList = SortedList(MainNote::class.java, object : SortedList.Callback<MainNote>() {
-        override fun compare(o1: MainNote, o2: MainNote): Int {
-            return (o2.main_timestamp - o1.main_timestamp).toInt()
+    private var sortedList = SortedList(ParentModel::class.java, object : SortedList.Callback<ParentModel>() {
+        override fun compare(o1: ParentModel, o2: ParentModel): Int {
+            return (o2.parent_timestamp - o1.parent_timestamp).toInt()
 
         }
 
@@ -28,12 +31,12 @@ class MyMainFirstAdapter: RecyclerView.Adapter<MyMainFirstAdapter.MainViewHolder
             notifyItemRangeChanged(position, count)
         }
 
-        override fun areContentsTheSame(oldItem: MainNote, newItem: MainNote): Boolean {
+        override fun areContentsTheSame(oldItem: ParentModel, newItem: ParentModel): Boolean {
             return oldItem.equals(newItem)
         }
 
-        override fun areItemsTheSame(item1: MainNote, item2: MainNote): Boolean {
-            return item1.main_uid == item2.main_uid
+        override fun areItemsTheSame(item1: ParentModel, item2: ParentModel): Boolean {
+            return item1.parent_uid == item2.parent_uid
         }
 
         override fun onInserted(position: Int, count: Int) {
@@ -51,15 +54,22 @@ class MyMainFirstAdapter: RecyclerView.Adapter<MyMainFirstAdapter.MainViewHolder
 
 
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private lateinit var mainNote: MainNote
+        private lateinit var mainNote: ParentModel
 
-        fun bind(mainNoter: MainNote) {
+        fun bind(mainNoter: ParentModel, mViewModel: FirstMainViewModel,) {
             mainNote = mainNoter
-            itemView.TvMainTitle.text = mainNote.main_title
-            itemView.TvTimesTamp.text = mainNote.main_timestamp.toString().asTime()
+            itemView.TvMainTitle.text = mainNote.parent_title
+            itemView.TvTimesTamp.text = mainNote.parent_timestamp.toString().asTime()
 
             itemView.main_layout_note.setOnClickListener{
+                val bundle = Bundle()
+                bundle.putInt("parent_uid", mainNote.parent_uid)
+                bundle.putString("parent_title", mainNote.parent_title)
+                itemView.findNavController().navigate(R.id.action_firstMainFragment_to_mainAddListFragment, bundle)
+            }
 
+            itemView.imParentDelete.setOnClickListener{
+                mViewModel.deleteParentModel(mainNote)
             }
         }
 
@@ -72,7 +82,7 @@ class MyMainFirstAdapter: RecyclerView.Adapter<MyMainFirstAdapter.MainViewHolder
     }
 
     override fun onBindViewHolder(holder: MyMainFirstAdapter.MainViewHolder, position: Int) {
-        sortedList.let { holder.bind(it.get(position)) }
+        sortedList.let { holder.bind(it.get(position), vModel) }
     }
 
 
@@ -80,9 +90,9 @@ class MyMainFirstAdapter: RecyclerView.Adapter<MyMainFirstAdapter.MainViewHolder
         return sortedList.size()
     }
 
-    fun setItems(notes: List<MainNote>) {
+    fun setItems(notes: List<ParentModel>, myViewModel: FirstMainViewModel) {
+        vModel = myViewModel
         sortedList.replaceAll(notes)
-
     }
 }
 

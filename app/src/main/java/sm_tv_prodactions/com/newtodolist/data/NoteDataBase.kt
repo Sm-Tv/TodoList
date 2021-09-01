@@ -4,15 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import sm_tv_prodactions.com.newtodolist.models.MainNote
 import sm_tv_prodactions.com.newtodolist.models.Note
-import sm_tv_prodactions.com.newtodolist.models.NotePlus
+import sm_tv_prodactions.com.newtodolist.models.foreignkey.ParentModel
 import sm_tv_prodactions.com.newtodolist.models.ShoppingList
+import sm_tv_prodactions.com.newtodolist.models.foreignkey.ChildModel
 
 
-@Database(entities = [Note::class, ShoppingList::class, MainNote::class, NotePlus::class], version = 6)
+@Database(entities = [Note::class, ShoppingList::class,
+    ParentModel::class, ChildModel::class], version = 20)
 abstract class NoteDataBase: RoomDatabase() {
 
     abstract fun noteDao(): NoteDao

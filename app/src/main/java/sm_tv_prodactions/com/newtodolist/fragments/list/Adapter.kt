@@ -12,9 +12,7 @@ import kotlinx.android.synthetic.main.item_new.view.*
 import sm_tv_prodactions.com.newtodolist.R
 import sm_tv_prodactions.com.newtodolist.fragments.list.note.ListFragmentDirections
 import sm_tv_prodactions.com.newtodolist.models.Note
-import sm_tv_prodactions.com.newtodolist.models.NotePlus
 import sm_tv_prodactions.com.newtodolist.viewmodels.NoteViewModels
-import kotlin.properties.Delegates
 
 
 class Adapter: RecyclerView.Adapter<Adapter.NoteViewHolder>() {

@@ -1,12 +1,10 @@
-package sm_tv_prodactions.com.newtodolist.fragments.mainList
+package sm_tv_prodactions.com.newtodolist.fragments.mainList.list
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -17,17 +15,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_first_main.view.*
-import kotlinx.android.synthetic.main.fragment_list.view.*
 import sm_tv_prodactions.com.newtodolist.R
+import sm_tv_prodactions.com.newtodolist.fragments.mainList.adapters.AdapterPersonalNote
+import sm_tv_prodactions.com.newtodolist.fragments.mainList.adapters.AdapterTest
 import sm_tv_prodactions.com.newtodolist.fragments.mainList.adapters.MyMainFirstAdapter
-import sm_tv_prodactions.com.newtodolist.models.MainNote
-import sm_tv_prodactions.com.newtodolist.viewmodels.MainNoteViewModel
+import sm_tv_prodactions.com.newtodolist.fragments.mainList.viewmodel.FirstMainViewModel
+import sm_tv_prodactions.com.newtodolist.models.foreignkey.ParentModel
 
 
 class FirstMainFragment : Fragment() {
 
     private lateinit var adapter: MyMainFirstAdapter
-    private lateinit var mViewModel: MainNoteViewModel
+
+    private lateinit var mViewModel: FirstMainViewModel
 
 
     override fun onCreateView(
@@ -44,6 +44,7 @@ class FirstMainFragment : Fragment() {
 
         //recycler view
         adapter = MyMainFirstAdapter()
+
         val myRecyclerView = view.my_first_main_recyclerView
         myRecyclerView.adapter = adapter
         myRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -51,19 +52,18 @@ class FirstMainFragment : Fragment() {
         //myRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
 
         //view model
-        mViewModel = ViewModelProvider(this).get(MainNoteViewModel::class.java)
-        mViewModel.readAllMainNoteData.observe(viewLifecycleOwner, Observer { mainNote->
-            adapter.setItems(mainNote)
+        mViewModel = ViewModelProvider(this).get(FirstMainViewModel::class.java)
+        mViewModel.readParentModel.observe(viewLifecycleOwner, Observer {
+            adapter.setItems(it, mViewModel)
         })
 
+        setHasOptionsMenu(true)
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-
-
     }
 
     private fun addMainNote() {
@@ -75,14 +75,12 @@ class FirstMainFragment : Fragment() {
         pbutton.setOnClickListener {
             val title = edText.text.toString()
             val timestamp = System.currentTimeMillis()
-            val mainNote = MainNote(0,title,timestamp)
-            //val key_id = TOKEN_ID
+            val mainNote = ParentModel(0,title,timestamp)
             if (chekInput(title)) {
-                //getData(title,key_id)//делаем запрос
-                //добавление в бд
-                mViewModel.addMainNote(mainNote)
+
+                mViewModel.addParentModel(mainNote)
                 dialog.dismiss()//закрываем диалоговое окно
-                bundelMainNote(title,timestamp)
+                //bundelMainNote(title,timestamp)
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -104,13 +102,32 @@ class FirstMainFragment : Fragment() {
         return !(TextUtils.isEmpty(title))
     }
 
-    private fun bundelMainNote(title: String, time: Long){
-        val bundle = Bundle()
-        bundle.putString("mainNoteName", title)
-        bundle.putLong("idMainList", time)
-        findNavController().navigate(R.id.action_firstMainFragment_to_mainListFragment,bundle)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.list_menu, menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+
+            R.id.delete -> deleteAll()
+
+        }
+
+        return true
+    }
+
+    private fun deleteAll() {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setPositiveButton(resources.getString(R.string.yes)){_, _ ->
+            mViewModel.deleteAllParentModel()
+        }
+        dialog.setNegativeButton(resources.getString(R.string.no)){_, _ ->
+
+        }
+        dialog.setTitle(resources.getString(R.string.Title_dialog_note))
+        dialog.setMessage(resources.getString(R.string.massage_dialog_note))
+        dialog.create().show()
+    }
 
 
 }

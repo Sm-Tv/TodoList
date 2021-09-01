@@ -61,7 +61,7 @@ class ListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.delete -> deliteAll()
+            R.id.delete -> deleteAll()
 
         }
 
@@ -69,7 +69,7 @@ class ListFragment : Fragment() {
     }
 
 
-    private fun deliteAll() {
+    private fun deleteAll() {
         val dialog = AlertDialog.Builder(requireContext())
         dialog.setPositiveButton(resources.getString(R.string.yes)){_, _ ->
             mViewModel.deleteAllNotes()

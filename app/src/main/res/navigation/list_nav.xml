@@ -78,55 +78,80 @@
     </fragment>
     <fragment
         android:id="@+id/firstMainFragment"
-        android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.FirstMainFragment"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.list.FirstMainFragment"
         android:label="@string/first_main_lists"
         tools:layout="@layout/fragment_first_main" >
         <action
-            android:id="@+id/action_firstMainFragment_to_mainListFragment"
-            app:destination="@id/mainListFragment" />
-        <action
             android:id="@+id/action_firstMainFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_firstMainFragment_to_mainAddListFragment"
+            app:destination="@id/mainAddListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mainListFragment"
-        android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.MainListFragment"
+        android:id="@+id/mainAddListFragment"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.list.MainAddListFragment"
         android:label="fragment_main_list"
-        tools:layout="@layout/fragment_main_list" >
+        tools:layout="@layout/fragment_main_add_list" >
         <action
             android:id="@+id/action_mainListFragment_to_firstMainFragment"
             app:destination="@id/firstMainFragment" />
-        <argument
-            android:name="mainNoteName"
-            app:argType="string"
-            android:defaultValue="not Name " />
-        <argument
-            android:name="idMainList"
-            app:argType="long"
-            android:defaultValue="0L" />
-        <action
-            android:id="@+id/action_mainListFragment_to_updatePersonalOneNote"
-            app:destination="@id/updatePersonalOneNote" />
         <action
             android:id="@+id/action_mainListFragment_to_addPersonalNote"
             app:destination="@id/addPersonalNote" />
+        <argument
+            android:name="parent_uid"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="parent_title"
+            app:argType="string"
+            android:defaultValue="null" />
+        <action
+            android:id="@+id/action_mainAddListFragment_to_updatePersonalOneNote"
+            app:destination="@id/updatePersonalOneNote" />
     </fragment>
     <fragment
         android:id="@+id/updatePersonalOneNote"
-        android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.UpdatePersonalOneNote"
-        android:label="fragment_update_personal_one_note"
-        tools:layout="@layout/fragment_update_personal_one_note" >
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.update.UpdatePersonalOneNote"
+        android:label="Обновление"
+        tools:layout="@layout/fragment_update_personal_one_note">
         <action
-            android:id="@+id/action_updatePersonalOneNote_to_mainListFragment"
-            app:destination="@id/mainListFragment" />
+            android:id="@+id/action_updatePersonalOneNote_to_mainAddListFragment"
+            app:destination="@id/mainAddListFragment" />
+        <argument
+            android:name="parent_title"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="child_title"
+            app:argType="string"
+            android:defaultValue="null" />
+        <argument
+            android:name="child_done"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        <argument android:name="child_uid"
+            app:argType="integer" />
+        <argument
+            android:name="uid"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/addPersonalNote"
-        android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.AddPersonalNote"
-        android:label="fragment_add_personal_note"
+        android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.add.AddPersonalNote"
+        android:label="Add"
         tools:layout="@layout/fragment_add_personal_note" >
         <action
-            android:id="@+id/action_addPersonalNote_to_mainListFragment"
-            app:destination="@id/mainListFragment" />
+            android:id="@+id/action_addPersonalNote_to_mainAddListFragment"
+            app:destination="@id/mainAddListFragment" />
+        <argument
+            android:name="parent_uid"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="parent_title"
+            app:argType="string"
+            android:defaultValue="nullAdd" />
     </fragment>
 </navigation>

@@ -2,10 +2,9 @@ package sm_tv_prodactions.com.newtodolist.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import sm_tv_prodactions.com.newtodolist.models.MainNote
 import sm_tv_prodactions.com.newtodolist.models.Note
-import sm_tv_prodactions.com.newtodolist.models.NotePlus
-import sm_tv_prodactions.com.newtodolist.models.StickyNotes
+import sm_tv_prodactions.com.newtodolist.models.foreignkey.ChildModel
+import sm_tv_prodactions.com.newtodolist.models.foreignkey.ParentModel
 
 @Dao
 interface NoteDao {
@@ -26,30 +25,37 @@ interface NoteDao {
     fun getAllLiveData(): LiveData<List<Note>>
 
 
-    //main!!
+    //foreignKey
+    @Transaction @Query("SELECT * FROM ChildModel WHERE child_uid = :child_parent_uid")
+    fun getForeignKeyPersonalNote(child_parent_uid: Int): LiveData<List<ChildModel>>
+
     @Insert( onConflict = OnConflictStrategy.REPLACE )
-    fun insertMain (vararg mainNote: MainNote)
+    fun insertParentModel(vararg parentModel: ParentModel)
+
+    @Insert( onConflict = OnConflictStrategy.REPLACE )
+    fun insertChildModel(vararg childModel: ChildModel)
+
+    @Query("SELECT * FROM ParentModel ORDER BY parent_uid DESC")
+    fun getParentModel(): LiveData<List<ParentModel>>
+////////
+    @Query("SELECT * FROM ChildModel ORDER BY uid DESC")
+    fun getChildModel(): LiveData<List<ChildModel>>
 
     @Update
-    fun updateMain(vararg mainNote: MainNote)
+    fun updateChildModel(vararg childModel: ChildModel)
 
     @Delete
-    fun deleteMain(mainNote: MainNote)
+    fun deleteChildModel(childModel: ChildModel)
 
-    @Query("DELETE FROM Main_note_table")
-    fun deleteAllMainNotes()
+    @Delete
+    fun deleteParentModel(parentModel: ParentModel)
 
-   // @Query("SELECT * FROM Main_note_table ORDER BY main_uid DESC")
-    //fun getAllLiveMainData(): LiveData<List<StickyNotes>>
+    @Query("DELETE  FROM ChildModel WHERE child_uid = :child_parent_uid")
+    fun deleteAllChildInParent(child_parent_uid: Int)
 
-    @Query("SELECT * FROM Main_note_table ORDER BY main_uid DESC")
-    fun getAllLiveMainNoteData(): LiveData<List<MainNote>>
+    @Query("DELETE  FROM ParentModel")
+    fun deleteAllParentModel()
 
-    @Query("SELECT * FROM Main_note_table WHERE main_timestamp = :employeeId")
-    fun getPersonalNote(employeeId: Long): LiveData<List<StickyNotes>>
-
-    //@Query("SELECT * FROM goods WHERE done = 0")
-    //fun getAllLiveData(): LiveData<List<Note>>
 
 
 }

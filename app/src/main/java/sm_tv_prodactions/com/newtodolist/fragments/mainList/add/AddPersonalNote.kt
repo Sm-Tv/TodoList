@@ -1,36 +1,38 @@
-package sm_tv_prodactions.com.newtodolist.fragments.add.note
+package sm_tv_prodactions.com.newtodolist.fragments.mainList.add
 
 import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.*
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.fragment_add.*
+import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_add.view.*
 import sm_tv_prodactions.com.newtodolist.R
-import sm_tv_prodactions.com.newtodolist.models.Note
-import sm_tv_prodactions.com.newtodolist.viewmodels.NoteViewModels
+import sm_tv_prodactions.com.newtodolist.fragments.mainList.viewmodel.FirstMainViewModel
+import sm_tv_prodactions.com.newtodolist.models.foreignkey.ChildModel
 
 
-class AddFragment : Fragment() {
+class AddPersonalNote : Fragment() {
 
-    private lateinit var mViewModel: NoteViewModels
+    private lateinit var mViewModel: FirstMainViewModel
     private lateinit var edTitle: EditText
+    private val args by navArgs<AddPersonalNoteArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add, container, false)
+        val view =  inflater.inflate(R.layout.fragment_add_personal_note, container, false)
 
-        mViewModel = ViewModelProvider(this).get(NoteViewModels::class.java)
+        mViewModel = ViewModelProvider(this).get(FirstMainViewModel::class.java)
 
         //устанавливает каретку
         edTitle = view.findViewById(R.id.edTitle)
@@ -38,7 +40,6 @@ class AddFragment : Fragment() {
         view.idAdd.setOnClickListener {
             insertDataToDatabase()
         }
-        setHasOptionsMenu(true)
 
         return view
     }
@@ -49,16 +50,20 @@ class AddFragment : Fragment() {
     }
 
     private fun insertDataToDatabase() {
+        val parent_uid = args.parentUid
         val title = edTitle.text.toString()
         val done = false
         val timestamp = System.currentTimeMillis()
         if(chekInput(title)){
-            val note = Note(0,title,timestamp,done)
-            mViewModel.addNote(note)
+            val childModel = ChildModel(0, parent_uid, title, timestamp, done)
+            mViewModel.addChildModel(childModel)
             //Toast.makeText(requireContext(),"выполнено добавление в бд",Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_addFragment_to_listFragment)
+            val bundle = Bundle()
+            bundle.putInt("parent_uid", args.parentUid )
+            bundle.putString("parent_title", args.parentTitle)
+            findNavController().navigate(R.id.action_addPersonalNote_to_mainAddListFragment, bundle)
         }else {
-            Toast.makeText(requireContext(),resources.getString(R.string.warning_message),Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),resources.getString(R.string.warning_message), Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -67,23 +72,7 @@ class AddFragment : Fragment() {
         return !(TextUtils.isEmpty(title))
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.add_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.save ->  {
-                insertDataToDatabase()
-            }
-            android.R.id.home -> findNavController().navigate(R.id.action_addFragment_to_listFragment)
-        }
-
-
-        return true
-    }
-
-    fun View.showKeyboard() {
+    private fun View.showKeyboard() {
         //поставит фокус на поле где вводить текст
         this.requestFocus()
         //чтобы не прокручивал в право
@@ -93,4 +82,5 @@ class AddFragment : Fragment() {
         inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 
     }
+
 }
