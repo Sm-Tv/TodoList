@@ -114,7 +114,7 @@
     <fragment
         android:id="@+id/updatePersonalOneNote"
         android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.update.UpdatePersonalOneNote"
-        android:label="Обновление"
+        android:label="Обновить заметку"
         tools:layout="@layout/fragment_update_personal_one_note">
         <action
             android:id="@+id/action_updatePersonalOneNote_to_mainAddListFragment"
@@ -140,7 +140,7 @@
     <fragment
         android:id="@+id/addPersonalNote"
         android:name="sm_tv_prodactions.com.newtodolist.fragments.mainList.add.AddPersonalNote"
-        android:label="Add"
+        android:label="Добавить заметку"
         tools:layout="@layout/fragment_add_personal_note" >
         <action
             android:id="@+id/action_addPersonalNote_to_mainAddListFragment"

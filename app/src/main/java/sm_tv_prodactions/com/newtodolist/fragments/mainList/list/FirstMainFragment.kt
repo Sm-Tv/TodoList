@@ -124,8 +124,8 @@ class FirstMainFragment : Fragment() {
         dialog.setNegativeButton(resources.getString(R.string.no)){_, _ ->
 
         }
-        dialog.setTitle(resources.getString(R.string.Title_dialog_note))
-        dialog.setMessage(resources.getString(R.string.massage_dialog_note))
+        dialog.setTitle(resources.getString(R.string.Title_dialog_parent))
+        dialog.setMessage(resources.getString(R.string.massage_dialog_parent))
         dialog.create().show()
     }
 

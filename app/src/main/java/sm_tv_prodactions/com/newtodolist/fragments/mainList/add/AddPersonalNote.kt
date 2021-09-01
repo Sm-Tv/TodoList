@@ -3,10 +3,8 @@ package sm_tv_prodactions.com.newtodolist.fragments.mainList.add
 import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
@@ -40,6 +38,8 @@ class AddPersonalNote : Fragment() {
         view.idAdd.setOnClickListener {
             insertDataToDatabase()
         }
+
+        setHasOptionsMenu(true)
 
         return view
     }
@@ -81,6 +81,26 @@ class AddPersonalNote : Fragment() {
         val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.add_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.save ->  {
+                insertDataToDatabase()
+            }
+            android.R.id.home -> {
+                val bundle = Bundle()
+                bundle.putInt("parent_uid", args.parentUid )
+                bundle.putString("parent_title", args.parentTitle)
+                findNavController().navigate(R.id.action_addPersonalNote_to_mainAddListFragment, bundle)}
+        }
+
+
+        return true
     }
 
 }

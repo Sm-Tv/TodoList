@@ -69,6 +69,8 @@ class ListFragment : Fragment() {
     }
 
 
+
+
     private fun deleteAll() {
         val dialog = AlertDialog.Builder(requireContext())
         dialog.setPositiveButton(resources.getString(R.string.yes)){_, _ ->

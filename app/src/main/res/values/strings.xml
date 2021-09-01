@@ -12,6 +12,9 @@
     <string name="Title_dialog_shop">Удалить все покупки?</string>
     <string name="massage_dialog_shop">Будут удалены все ваши покупки.</string>
 
+    <string name="Title_dialog_parent">Удалить все списки?</string>
+    <string name="massage_dialog_parent">Будут удалены все ваши списки.</string>
+
 
     <string name="note_list">Заметки</string>
     <string name="add_note_list">Добавить заметку</string>
