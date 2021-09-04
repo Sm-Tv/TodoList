@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-        botoomNavView.selectedItemId = R.id.main_note_list
+        //botoomNavView.selectedItemId = R.id.main_note_list
         super.onStart()
     }
 
